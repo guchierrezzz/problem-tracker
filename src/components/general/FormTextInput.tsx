@@ -1,15 +1,4 @@
-import { UseFormRegister, FieldErrors } from "react-hook-form";
-
-type InputName = "name" | "image";
-
-interface IFormTextInputProps {
-  register: UseFormRegister<any>;
-  errors: FieldErrors<any>;
-  inputName: InputName;
-  inputType: string;
-  inputPlaceholder: string;
-  value?: string;
-}
+import { IFormTextInputProps } from "../../interfaces";
 
 export const FormTextInput = ({
   register,

@@ -9,7 +9,7 @@ export const ProjectFormSchema = z.object({
     .string()
     .min(1, "Insira uma descrição.")
     .max(150, "Descrição deve ter menos que 150 caractéres."),
-  image: z.string().optional(),
+  image_url: z.string().optional(),
 });
 
 export type TProjectFormSchema = z.infer<typeof ProjectFormSchema>;

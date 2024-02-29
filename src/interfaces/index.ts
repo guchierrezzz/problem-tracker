@@ -1,11 +1,36 @@
 import { ReactNode } from "react";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { TProjectFormSchema } from "../schemas/ProjectSchema";
+import { TProblemFormSchema } from "../schemas/ProblemSchema";
 
 export interface IMainContext {
   NavbarDrawerRef: React.RefObject<HTMLInputElement>;
   NavbarElementRef: React.RefObject<HTMLDivElement>;
   toggleDrawer: () => void;
   addProjectModalRef: React.RefObject<HTMLDialogElement>;
+  editProjectModalRef: React.RefObject<HTMLDialogElement>;
   projects: IProject[];
+  addProject: (formData: TProjectFormSchema) => Promise<void>;
+  editProject: (formData: TProjectFormSchema) => Promise<void>;
+  selectedProject: IProject | undefined;
+  setSelectedProject: React.Dispatch<
+    React.SetStateAction<IProject | undefined>
+  >;
+  getSelectedProject: (e: any) => Promise<void>;
+  loadProblems: (id: Number) => Promise<void>;
+  problems: IProblem[];
+  setProblems: React.Dispatch<React.SetStateAction<IProblem[]>>;
+  addProblemModalRef: React.RefObject<HTMLDialogElement>;
+  addProblem: (formData: TProblemFormSchema) => Promise<void>;
+  selectedProblem: IProblem | undefined;
+  setSelectedProblem: React.Dispatch<
+    React.SetStateAction<IProblem | undefined>
+  >;
+  getSelectedProblem: (e: any) => Promise<void>;
+  loadProjects: () => Promise<void>;
+  editProblem: (formData: TProblemFormSchema) => Promise<void>;
+  deleteProblem: () => Promise<void>;
+  toggleProblemStatus: () => Promise<void>;
 }
 
 export interface IMainContextProps {
@@ -23,13 +48,46 @@ export interface IProjectContextProps {
 
 export interface IProject {
   id: number;
-  name: string;
+  title: string;
   description: string;
-  image: string;
+  image_url: string;
+}
+
+export interface IProblem {
+  id: number;
+  title: string;
+  description: string;
+  finished: boolean;
+  started_at: string;
+}
+
+export interface IProblemCardProps {
+  id: number;
+  title: string;
+  description: string;
+  finished: boolean;
+  started_at: string;
+  project: IProject;
 }
 
 export interface IProjectCardProps {
+  id: number;
   title: string;
   description: string;
   image_url?: string;
+}
+
+type InputName = "title" | "description" | "image_url";
+
+export interface IFormTextInputProps {
+  register: UseFormRegister<any>;
+  errors: FieldErrors<any>;
+  inputName: InputName;
+  inputType: string;
+  inputPlaceholder: string;
+  value?: string;
+}
+
+export interface IProjectPageProps {
+  project: IProject;
 }

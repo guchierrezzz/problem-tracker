@@ -3,7 +3,7 @@ import { ProjectCard } from "../components/project/ProjectCard";
 import { MainContext } from "../providers/MainContext";
 
 export const Home = () => {
-  const { addProjectModalRef } = useContext(MainContext);
+  const { addProjectModalRef, projects } = useContext(MainContext);
   return (
     <div className="w-5/6 py-10 mx-auto">
       <div className="flex items-center justify-between">
@@ -21,11 +21,15 @@ export const Home = () => {
       </div>
 
       <div className="grid w-full gap-10 py-10 lg:grid-cols-3">
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
-        <ProjectCard />
+        {projects.map(({ description, id, image_url, title }) => (
+          <ProjectCard
+            description={description}
+            id={id}
+            key={id}
+            title={title}
+            image_url={image_url}
+          />
+        ))}
       </div>
     </div>
   );

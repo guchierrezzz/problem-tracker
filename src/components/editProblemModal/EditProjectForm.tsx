@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { BsPlusCircle } from "react-icons/bs";
 import {
   ProjectFormSchema,
   TProjectFormSchema,
@@ -10,7 +9,7 @@ import { FormTextareaInput } from "../general/FormTextareaInput";
 import { MainContext } from "../../providers/MainContext";
 import { FormTextInput } from "../general/FormTextInput";
 
-export const AddProjectForm = () => {
+export const EditProjectForm = () => {
   const {
     register,
     handleSubmit,
@@ -20,10 +19,10 @@ export const AddProjectForm = () => {
     resolver: zodResolver(ProjectFormSchema),
   });
 
-  const { addProject } = useContext(MainContext);
+  const { editProject, selectedProject } = useContext(MainContext);
 
   const submit = (formData: TProjectFormSchema) => {
-    addProject(formData);
+    editProject(formData);
     reset();
   };
 
@@ -35,12 +34,14 @@ export const AddProjectForm = () => {
         inputName="title"
         inputPlaceholder="Título"
         inputType="text"
+        value={selectedProject?.title}
       />
       <FormTextareaInput
         errors={errors}
         register={register}
         inputName="description"
         inputPlaceholder="Descrição"
+        value={selectedProject?.description}
       />
       <FormTextInput
         errors={errors}
@@ -48,10 +49,10 @@ export const AddProjectForm = () => {
         inputName="image_url"
         inputPlaceholder="URL da imagem (opcional)"
         inputType="text"
+        value={selectedProject?.image_url}
       />
       <button className="self-end h-10 px-8 tracking-widest uppercase rounded-none btn btn-sm btn-primary w-fit">
-        <BsPlusCircle className="text-lg" />
-        Adicionar
+        Editar
       </button>
     </form>
   );

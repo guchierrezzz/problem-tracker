@@ -1,29 +1,27 @@
 import { useForm } from "react-hook-form";
 import { BsPlusCircle } from "react-icons/bs";
-import {
-  ProjectFormSchema,
-  TProjectFormSchema,
-} from "../../schemas/ProjectSchema";
+import { ProjectFormSchema } from "../../schemas/ProjectSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { FormTextareaInput } from "../general/FormTextareaInput";
 import { MainContext } from "../../providers/MainContext";
 import { FormTextInput } from "../general/FormTextInput";
+import { TProblemFormSchema } from "../../schemas/ProblemSchema";
 
-export const AddProjectForm = () => {
+export const AddProblemForm = () => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<TProjectFormSchema>({
+  } = useForm<TProblemFormSchema>({
     resolver: zodResolver(ProjectFormSchema),
   });
 
-  const { addProject } = useContext(MainContext);
+  const { addProblem } = useContext(MainContext);
 
-  const submit = (formData: TProjectFormSchema) => {
-    addProject(formData);
+  const submit = (formData: TProblemFormSchema) => {
+    addProblem(formData);
     reset();
   };
 
@@ -41,13 +39,6 @@ export const AddProjectForm = () => {
         register={register}
         inputName="description"
         inputPlaceholder="Descrição"
-      />
-      <FormTextInput
-        errors={errors}
-        register={register}
-        inputName="image_url"
-        inputPlaceholder="URL da imagem (opcional)"
-        inputType="text"
       />
       <button className="self-end h-10 px-8 tracking-widest uppercase rounded-none btn btn-sm btn-primary w-fit">
         <BsPlusCircle className="text-lg" />

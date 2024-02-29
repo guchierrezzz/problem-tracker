@@ -3,6 +3,7 @@ import { MainContext } from "../../providers/MainContext";
 import { Link } from "react-router-dom";
 import logo from "../../assets/112h-logo.png";
 import { AddProjectModal } from "../addProjectModal/AddProjectModal";
+import { EditProjectModal } from "../editProjectModal/EditProjectModal";
 
 interface INavbarProps {
   children: ReactNode;
@@ -54,6 +55,7 @@ export const Navbar = ({ children }: INavbarProps) => {
           </div>
         </div>
         <AddProjectModal />
+        <EditProjectModal />
         {children}
       </div>
       <div className="drawer-side">
