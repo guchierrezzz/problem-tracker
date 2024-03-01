@@ -36,16 +36,16 @@ export const MainContextProvider = ({ children }: IMainContextProps) => {
 
   const loadProjects = async () => {
     try {
-      const { data } = await api.get("/projects");
+      const { data } = await api.get("/project");
       await setProjects(data);
-    } catch {
-      toast.error("Houve um erro interno no servidor.");
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     }
   };
 
   const addProject = async (formData: TProjectFormSchema) => {
     try {
-      await api.post("/projects", formData, {});
+      await api.post("/project", formData, {});
       loadProjects();
       toast.success(`Projeto adicionado com sucesso.`);
       addProjectModalRef.current?.close();
@@ -56,7 +56,7 @@ export const MainContextProvider = ({ children }: IMainContextProps) => {
 
   const editProject = async (formData: TProjectFormSchema) => {
     try {
-      await api.patch(`/projects/${selectedProject?.id}`, formData, {});
+      await api.patch(`/project/${selectedProject?.id}`, formData, {});
       loadProjects();
       toast.success(`Projeto editado com sucesso.`);
       editProjectModalRef.current?.close();
@@ -65,23 +65,32 @@ export const MainContextProvider = ({ children }: IMainContextProps) => {
     }
   };
 
+  const deleteProject = async () => {
+    try {
+      if (selectedProject) {
+        await api.delete(`/project/${selectedProject?.id}`);
+        toast.success("Projeto deletado com sucesso.");
+        loadProjects();
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+      console.log(error);
+    }
+  };
+
   const loadProblems = async (projectId: Number) => {
     try {
-      const { data } = await api.get(`/projects/${projectId}/problems`);
+      const { data } = await api.get(`/project/${projectId}/problem`);
       await setProblems(data);
-    } catch {
-      toast.error("Houve um erro interno no servidor.");
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     }
   };
 
   const addProblem = async (formData: TProblemFormSchema) => {
     try {
       if (selectedProject) {
-        await api.post(
-          `/projects/${selectedProject.id}/problems`,
-          formData,
-          {}
-        );
+        await api.post(`/project/${selectedProject.id}/problem`, formData, {});
         loadProblems(selectedProject.id);
         toast.success(`Problema adicionado com sucesso.`);
         addProblemModalRef.current?.close();
@@ -91,39 +100,20 @@ export const MainContextProvider = ({ children }: IMainContextProps) => {
     }
   };
 
-  const editProblem = async (formData: TProblemFormSchema) => {
-    try {
-      if (selectedProject) {
-        await api.patch(
-          `/projects/${selectedProject.id}/problems/${selectedProject.id}`,
-          formData,
-          {}
-        );
-        loadProblems(selectedProject.id);
-        toast.success(`Problema editado com sucesso.`);
-        editProjectModalRef.current?.close();
-      }
-    } catch (error: any) {
-      toast.error(error.response.data.message);
-    }
-  };
-
   const toggleProblemStatus = async () => {
     try {
       const problemData = {
-        title: selectedProblem?.title,
-        description: selectedProblem?.description,
         finished: !selectedProblem?.finished,
       };
 
       if (selectedProject) {
         await api.patch(
-          `/projects/${selectedProject.id}/problems/${selectedProblem?.id}`,
+          `/project/${selectedProject.id}/problem/${selectedProblem?.id}`,
           problemData,
           {}
         );
         loadProblems(selectedProject.id);
-        toast.success(`Problema editado com sucesso.`);
+        toast.success(`Status alterado com sucesso.`);
         editProjectModalRef.current?.close();
       }
     } catch (error: any) {
@@ -135,7 +125,7 @@ export const MainContextProvider = ({ children }: IMainContextProps) => {
     try {
       if (selectedProject) {
         await api.delete(
-          `/projects/${selectedProject?.id}/problems/${selectedProblem?.id}`
+          `/project/${selectedProject?.id}/problem/${selectedProblem?.id}`
         );
         toast.success("Problema deletado com sucesso.");
         loadProblems(selectedProject.id);
@@ -190,8 +180,8 @@ export const MainContextProvider = ({ children }: IMainContextProps) => {
           getSelectedProblem,
           loadProjects,
           deleteProblem,
-          editProblem,
           toggleProblemStatus,
+          deleteProject,
         }}
       >
         {children}

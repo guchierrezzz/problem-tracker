@@ -3,12 +3,12 @@ import { BsPlusCircle } from "react-icons/bs";
 import {
   ProjectFormSchema,
   TProjectFormSchema,
-} from "../../schemas/ProjectSchema";
+} from "../../../schemas/ProjectSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
-import { FormTextareaInput } from "../general/FormTextareaInput";
-import { MainContext } from "../../providers/MainContext";
-import { FormTextInput } from "../general/FormTextInput";
+import { FormTextareaInput } from "../../general/FormTextareaInput";
+import { MainContext } from "../../../providers/MainContext";
+import { FormTextInput } from "../../general/FormTextInput";
 
 export const AddProjectForm = () => {
   const {

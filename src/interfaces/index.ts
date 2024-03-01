@@ -28,9 +28,9 @@ export interface IMainContext {
   >;
   getSelectedProblem: (e: any) => Promise<void>;
   loadProjects: () => Promise<void>;
-  editProblem: (formData: TProblemFormSchema) => Promise<void>;
   deleteProblem: () => Promise<void>;
   toggleProblemStatus: () => Promise<void>;
+  deleteProject: () => Promise<void>;
 }
 
 export interface IMainContextProps {
@@ -62,11 +62,7 @@ export interface IProblem {
 }
 
 export interface IProblemCardProps {
-  id: number;
-  title: string;
-  description: string;
-  finished: boolean;
-  started_at: string;
+  problem: IProblem;
   project: IProject;
 }
 
@@ -90,4 +86,31 @@ export interface IFormTextInputProps {
 
 export interface IProjectPageProps {
   project: IProject;
+}
+
+export interface IDropdownMenuProps {
+  finished: boolean;
+}
+
+export interface IProblemCardBodyProps {
+  problem: IProblem;
+  project: IProject;
+}
+
+export interface IProblemsPageHeaderProps {
+  project: IProject;
+  addProblemModalRef: React.RefObject<HTMLDialogElement>;
+}
+
+export interface IProblemSectionProps {
+  problems: IProblem[];
+  project: IProject;
+}
+
+export interface IProblemStatisticsProps {
+  problems: IProblem[];
+}
+
+export interface IProblemOverviewProps {
+  problem: IProblem;
 }

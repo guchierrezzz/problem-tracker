@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xl: "1600px",
+      },
       animation: {
         "fade-translate": "fade-translate 1000ms",
         blink: "blink 2000ms infinite",

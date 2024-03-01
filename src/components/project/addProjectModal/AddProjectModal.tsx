@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MainContext } from "../../providers/MainContext";
+import { MainContext } from "../../../providers/MainContext";
 import { AddProjectForm } from "./AddProjectForm";
 
 export const AddProjectModal = () => {

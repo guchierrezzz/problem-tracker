@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { BsPlusCircle } from "react-icons/bs";
-import { ProjectFormSchema } from "../../schemas/ProjectSchema";
+import { ProjectFormSchema } from "../../../schemas/ProjectSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
-import { FormTextareaInput } from "../general/FormTextareaInput";
-import { MainContext } from "../../providers/MainContext";
-import { FormTextInput } from "../general/FormTextInput";
-import { TProblemFormSchema } from "../../schemas/ProblemSchema";
+import { FormTextareaInput } from "../../general/FormTextareaInput";
+import { MainContext } from "../../../providers/MainContext";
+import { FormTextInput } from "../../general/FormTextInput";
+import { TProblemFormSchema } from "../../../schemas/ProblemSchema";
 
 export const AddProblemForm = () => {
   const {

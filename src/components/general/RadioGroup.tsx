@@ -1,6 +1,6 @@
 export const RadioGroup = () => {
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-5 items-center justify-center">
       <input
         className="tracking-widest uppercase join-item btn btn-primary"
         type="radio"

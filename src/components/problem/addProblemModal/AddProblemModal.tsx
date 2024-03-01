@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MainContext } from "../../providers/MainContext";
+import { MainContext } from "../../../providers/MainContext";
 import { AddProblemForm } from "./AddProblemForm";
 
 export const AddProblemModal = () => {

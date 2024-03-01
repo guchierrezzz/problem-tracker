@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { IProjectCardProps } from "../../interfaces";
 import { MainContext } from "../../providers/MainContext";
 import { Link } from "react-router-dom";
+import { ProjectCardDropdownMenu } from "./ProjectCardDropdownMenu";
 
 export const ProjectCard = ({
   description,
@@ -9,9 +10,12 @@ export const ProjectCard = ({
   title,
   image_url,
 }: IProjectCardProps) => {
-  const { editProjectModalRef, getSelectedProject } = useContext(MainContext);
+  const { getSelectedProject } = useContext(MainContext);
   return (
-    <div id={String(id)} className="shadow-xl parent-selector card bg-base-100">
+    <div
+      id={String(id)}
+      className="shadow-xl parent-selector card bg-base-100 animate-fade-translate"
+    >
       <figure>
         <img
           className="object-cover w-full h-52"
@@ -27,20 +31,12 @@ export const ProjectCard = ({
         <h2 className="card-title">{title}</h2>
         <p>{description}</p>
         <div className="flex justify-end gap-3">
-          <button
-            onClick={(e: any) => {
-              editProjectModalRef.current?.showModal();
-              getSelectedProject(e);
-            }}
-            className="tracking-widest uppercase btn btn-sm btn-primary"
-          >
-            Editar
-          </button>
+          <ProjectCardDropdownMenu />
           <Link
             onClick={(e: any) => {
               getSelectedProject(e);
             }}
-            to={`/projects/${id}`}
+            to={`/project/${id}`}
             className="tracking-widest uppercase btn btn-sm btn-primary"
           >
             Acessar

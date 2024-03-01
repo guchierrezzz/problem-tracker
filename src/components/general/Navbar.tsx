@@ -2,8 +2,8 @@ import { ReactNode, useContext } from "react";
 import { MainContext } from "../../providers/MainContext";
 import { Link } from "react-router-dom";
 import logo from "../../assets/112h-logo.png";
-import { AddProjectModal } from "../addProjectModal/AddProjectModal";
-import { EditProjectModal } from "../editProjectModal/EditProjectModal";
+import { AddProjectModal } from "../project/addProjectModal/AddProjectModal";
+import { EditProjectModal } from "../project/editProjectModal/EditProjectModal";
 
 interface INavbarProps {
   children: ReactNode;
@@ -15,7 +15,7 @@ export const Navbar = ({ children }: INavbarProps) => {
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="flex flex-col drawer-content bg-base-200">
+      <div className="flex flex-col drawer-content bg-base-300">
         {/* Navbar */}
         <div className="w-full navbar bg-base-100">
           <div className="flex-none lg:hidden">

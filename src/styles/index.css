@@ -29,3 +29,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.border-stats {
+  border-color: (--fallback-bc, oklch(var(--bc) / var(--tw-border-opacity)));
+}
